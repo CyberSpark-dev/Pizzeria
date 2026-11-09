@@ -1,0 +1,49 @@
+# Compiled output / build artifacts
+/dist
+/tmp
+/out-tsc
+/bazel-out
+/.angular/
+/coverage
+/playwright-report
+/test-results
+/.cache/
+
+# Dependencies
+/node_modules
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# IDE / editors
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/mcp.json
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.history/
+
+# Miscellaneous
+/.sass-cache/
+/connect.lock
+/libpeerconnection.log
+testem.log
+/typings
+__screenshots__/
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini

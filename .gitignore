@@ -1,0 +1,29 @@
+# Python / virtual environments
+**/venv/
+**/.venv/
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+**/.coverage
+**/.coverage.*
+**/htmlcov/
+
+# Node / Angular
+**/node_modules/
+**/dist/
+**/.angular/
+**/coverage/
+**/*.log
+
+# IDE / editor files
+**/.vscode/
+**/.idea/
+**/.history/
+**/*.swp
+
+# OS files
+**/.DS_Store
+**/Thumbs.db
+**/Desktop.ini

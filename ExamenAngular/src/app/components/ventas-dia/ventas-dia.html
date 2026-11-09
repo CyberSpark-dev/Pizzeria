@@ -1,0 +1,37 @@
+<div
+  class="border border-warning border-4 p-4 h-100 d-flex flex-column"
+  style="background-color: #a3a3a3"
+>
+  <p class="fw-bold mb-4 text-center">
+    Ventas por Día o Mes. <br />
+    Coloque un mes o dia para ver el registro de ventas durante ese lapso de tiempo
+  </p>
+
+  <div class="flex-grow-1 text-center mt-3">
+    <h5 *ngFor="let v of ventas" class="mb-3 fw-bold text-dark">
+      {{ v.cliente }} total ${{ v.total }}
+    </h5>
+
+    <h4 class="mt-5 fw-bold text-dark" *ngIf="totalGeneral > 0">
+      Ventas totales: ${{ totalGeneral }}
+    </h4>
+  </div>
+
+  <div class="mt-4 text-center">
+    <input
+      type="text"
+      class="form-control w-75 mx-auto mb-3 text-center"
+      placeholder="Ej. lunes, o marzo"
+      [(ngModel)]="criterioBuscar"
+      name="criterioBuscar"
+    />
+    <button
+      type="button"
+      class="btn btn-light px-4 border border-dark w-100"
+      style="max-width: 250px"
+      (click)="buscarVentas()"
+    >
+      Buscar Ventas
+    </button>
+  </div>
+</div>
