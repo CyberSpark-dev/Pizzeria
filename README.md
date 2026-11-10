@@ -9,7 +9,7 @@ Aplicación web para gestionar pedidos y ventas de una pizzería, separada en do
 ## Descripción
 El proyecto está organizado en dos módulos independientes pero conectados:
 
-- `ExamenAngular`: interfaz gráfica desarrollada con Angular para registrar pedidos, mostrar detalle y consultar ventas del día.
+- `ExamenAngular`: interfaz gráfica desarrollada con Angular para registrar pedidos, mostrar detalle y consultar ventas por día o mes, con el detalle de cada compra.
 - `ExamenFlask`: API REST desarrollada con Flask para registrar y consultar ventas.
 - `database/`: estructura o scripts relacionados con la base de datos.
 
@@ -79,11 +79,12 @@ proyecto_pizzeria/
 - Cálculo del subtotal y total del pedido.
 - Confirmación antes de guardar la venta.
 - Consulta de ventas por día o por mes.
+- Visualización del comprador y del detalle de pizzas, cantidades, ingredientes y subtotales de cada venta consultada.
 - Persistencia en base de datos MySQL.
 
 ## Endpoints principales del backend
 - `POST /api/ventas` — registra una nueva venta.
-- `GET /api/ventas/buscar/<criterio>` — busca ventas por día o mes.
+- `GET /api/ventas/buscar/<criterio>` — busca ventas por día o mes e incluye el comprador, fecha, total y detalle de productos de cada venta.
 
 ## Notas importantes
 - El frontend y el backend se mantienen en carpetas separadas con nombres específicos: `ExamenAngular` y `ExamenFlask`.

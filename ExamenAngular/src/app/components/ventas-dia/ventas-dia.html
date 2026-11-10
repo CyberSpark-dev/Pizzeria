@@ -8,12 +8,47 @@
   </p>
 
   <div class="flex-grow-1 text-center mt-3">
-    <h5 *ngFor="let v of ventas" class="mb-3 fw-bold text-dark">
-      {{ v.cliente }} total ${{ v.total }}
-    </h5>
+    <div *ngFor="let v of ventas" class="venta-item mb-3 p-3 border border-dark rounded">
+      <div class="d-flex flex-column flex-sm-row align-items-center justify-content-between gap-2">
+        <h5 class="mb-0 fw-bold text-dark">
+          {{ v.cliente }} — total ${{ v.total | number: '1.2-2' }}
+        </h5>
+        <button
+          type="button"
+          class="btn btn-outline-dark btn-sm"
+          [attr.aria-expanded]="ventaDetalleAbierto === v.id"
+          (click)="alternarDetalle(v)"
+        >
+          {{ ventaDetalleAbierto === v.id ? 'Ocultar detalle' : 'Ver detalle' }}
+        </button>
+      </div>
+
+      <div *ngIf="ventaDetalleAbierto === v.id" class="venta-detalle mt-3 p-3 text-start rounded">
+        <p class="mb-2"><strong>Comprador:</strong> {{ v.cliente }}</p>
+        <p class="mb-2"><strong>Fecha:</strong> {{ v.fecha }}</p>
+        <h6 class="fw-bold">Detalle de la compra</h6>
+        <div *ngIf="v.detalles.length; else sinDetalles">
+          <div *ngFor="let detalle of v.detalles" class="border-top border-secondary py-2">
+            <p class="mb-1">
+              <strong>{{ detalle.num_pizzas }}</strong>
+              pizza(s) {{ detalle.tamano }}
+            </p>
+            <p class="mb-1">
+              Ingredientes: {{ detalle.ingredientes || 'Ninguno' }}
+            </p>
+            <p class="mb-0">
+              Subtotal: ${{ detalle.subtotal | number: '1.2-2' }}
+            </p>
+          </div>
+        </div>
+        <ng-template #sinDetalles>
+          <p class="mb-0">No hay productos registrados para esta venta.</p>
+        </ng-template>
+      </div>
+    </div>
 
     <h4 class="mt-5 fw-bold text-dark" *ngIf="totalGeneral > 0">
-      Ventas totales: ${{ totalGeneral }}
+      Ventas totales: ${{ totalGeneral | number: '1.2-2' }}
     </h4>
   </div>
 

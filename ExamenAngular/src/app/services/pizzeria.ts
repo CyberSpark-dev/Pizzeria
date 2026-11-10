@@ -2,6 +2,21 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 
+export interface DetalleVenta {
+  tamano: string;
+  ingredientes: string;
+  num_pizzas: number;
+  subtotal: number;
+}
+
+export interface Venta {
+  id: number;
+  cliente: string;
+  fecha: string;
+  total: number;
+  detalles: DetalleVenta[];
+}
+
 @Injectable({ providedIn: 'root' })
 export class PizzeriaService {
   private apiUrl = 'http://127.0.0.1:5000/api/ventas';
@@ -39,6 +54,8 @@ export class PizzeriaService {
 
   // NUEVO: Método unificado para día o mes
   buscarVentas(criterio: string) {
-    return this.http.get(`${this.apiUrl}/buscar/${criterio}`);
+    return this.http.get<{ ventas: Venta[]; total: number }>(
+      `${this.apiUrl}/buscar/${encodeURIComponent(criterio)}`,
+    );
   }
 }

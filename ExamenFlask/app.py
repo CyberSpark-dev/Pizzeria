@@ -65,19 +65,38 @@ def buscar_ventas(criterio):
     meses_ano = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
     
     criterio = criterio.lower().strip()
-    resultado = []
-    total_busqueda = 0
-    
-    for v in ventas:
-        fecha = v.fecha_compra
+    ventas_encontradas = []
+
+    for venta in ventas:
+        fecha = venta.fecha_compra
         nombre_dia = dias_semana[fecha.weekday()]
         nombre_mes = meses_ano[fecha.month - 1]
         
-        # Si la palabra coincide con el día o con el mes de la venta, lo añadimos
         if criterio == nombre_dia or criterio == nombre_mes:
-            resultado.append({'cliente': v.nombre_cliente, 'total': float(v.total)})
-            total_busqueda += float(v.total)
-    
+            ventas_encontradas.append(venta)
+
+    detalles_por_venta = {}
+    if ventas_encontradas:
+        detalles = DetalleVenta.query.filter(
+            DetalleVenta.venta_id.in_([venta.id for venta in ventas_encontradas])
+        ).all()
+        for detalle in detalles:
+            detalles_por_venta.setdefault(detalle.venta_id, []).append({
+                'tamano': detalle.tamano,
+                'ingredientes': detalle.ingredientes,
+                'num_pizzas': detalle.num_pizzas,
+                'subtotal': float(detalle.subtotal),
+            })
+
+    resultado = [{
+        'id': venta.id,
+        'cliente': venta.nombre_cliente,
+        'fecha': venta.fecha_compra.isoformat(),
+        'total': float(venta.total),
+        'detalles': detalles_por_venta.get(venta.id, []),
+    } for venta in ventas_encontradas]
+    total_busqueda = sum(float(venta.total) for venta in ventas_encontradas)
+
     return jsonify({'ventas': resultado, 'total': total_busqueda})
 
 if __name__ == '__main__':

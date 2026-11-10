@@ -1,4 +1,4 @@
-﻿# Examen Angular - Proyecto de Pizzería
+# Examen Angular - Proyecto de Pizzería
 
 Aplicación frontend desarrollada con Angular para gestionar ventas de una pizzería. Este proyecto forma parte del repositorio principal `proyecto_pizzeria`, junto con el backend `ExamenFlask`.
 
@@ -9,6 +9,7 @@ La aplicación permite:
 - Registrar pedidos de pizzas.
 - Mostrar el detalle del pedido actual.
 - Consultar ventas por día.
+- Consultar las ventas por día o mes y desplegar el comprador y el detalle de productos, cantidades, ingredientes y subtotales.
 - Enviar la información al backend para almacenarla en MySQL.
 
 ## Estructura del proyecto
